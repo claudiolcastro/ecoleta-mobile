@@ -16,7 +16,7 @@ const Routes = () => {
         screenOptions={
           {
             cardStyle: {
-              backgroundColor: '#f0f0f5',
+              backgroundColor: "#f0f0f5",
             }
           }
         }

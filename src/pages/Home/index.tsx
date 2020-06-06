@@ -1,11 +1,14 @@
-import React from 'react';
-import { StyleSheet, View, Image, ImageBackground ,Text } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, ImageBackground ,Text, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather as Icon } from '@expo/vector-icons'
 
 const Home = () => {
   const navigation = useNavigation();
+
+  const [uf, setUf] = useState<string>('');
+  const [city, setCity] = useState<string>('');
 
   return (
     <ImageBackground
@@ -17,17 +20,34 @@ const Home = () => {
       <View style={styles.main}>
         <Image source={require('../../assets/logo.png')} />
 
-        <Text style={styles.title}>
-          Seu marketplace de coleta de resíduos
-        </Text>
+        <View>
+          <Text style={styles.title}>
+            Seu marketplace de coleta de resíduos
+          </Text>
 
-        <Text style={styles.description}>
-          Ajudamos você a encontrar o seu marketplace mais próximo
-        </Text>
+          <Text style={styles.description}>
+            Ajudamos você a encontrar o seu marketplace mais próximo
+          </Text>
+        </View>
       </View>
 
+      <TextInput
+        style={styles.input}
+        placeholder="UF"
+        autoCapitalize="characters"
+        maxLength={2}
+        autoCorrect={false}
+        onChangeText={setUf}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Cidade"
+        autoCorrect={false}
+        onChangeText={setCity}
+      />
+
       <View style={styles.footer}>
-        <RectButton style={styles.button} onPress={() => navigation.navigate('Points') }>
+        <RectButton style={styles.button} onPress={() => navigation.navigate('Points', { uf, city }) }>
           <View style={styles.buttonIcon}>
             <Text> <Icon name="arrow-right" color="#FFF" size={24} /> </Text>
           </View>
